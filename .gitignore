@@ -2,4 +2,4 @@
 *.bat
 
 #Build files
-/target
+/target/
