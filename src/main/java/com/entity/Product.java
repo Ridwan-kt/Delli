@@ -1,4 +1,4 @@
-package com.javatechie.crud.example.entity;
+package com.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

@@ -1,2 +1,5 @@
 #Secrets
 *.bat
+
+#Build files
+/target
