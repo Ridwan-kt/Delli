@@ -1,50 +1,58 @@
 package com.controller;
 
+import com.dtos.RequestProductDto;
+import com.dtos.ResponseProductDto;
 import com.entity.Product;
 import com.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("")
 public class ProductController {
 
-    @Autowired
-    private ProductService service;
+    private final ProductService productService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @PostMapping("/addProduct")
-    public Product addProduct(@RequestBody Product product) {
-        return service.saveProduct(product);
+    public ResponseEntity<ResponseProductDto> addProduct(@RequestBody RequestProductDto product) {
+        return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.CREATED);
     }
 
     @PostMapping("/addProducts")
-    public List<Product> addProducts(@RequestBody List<Product> products) {
-        return service.saveProducts(products);
+    public ResponseEntity<List<Product>> addProducts(@RequestBody List<Product> products) {
+        return new ResponseEntity<>(productService.saveProducts(products), HttpStatus.CREATED);
     }
 
-    @GetMapping("/products")
-    public List<Product> findAllProducts() {
-        return service.getProducts();
+    @GetMapping()
+    public ResponseEntity<List<Product>> findAllProducts() {
+        return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
     }
 
     @GetMapping("/productById/{id}")
-    public Product findProductById(@PathVariable int id) {
-        return service.getProductById(id);
+    public ResponseEntity<ResponseProductDto> findProductById(@PathVariable int id) {
+        return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
 
     @GetMapping("/product/{name}")
-    public Product findProductByName(@PathVariable String name) {
-        return service.getProductByName(name);
+    public ResponseEntity<ResponseProductDto> findProductByName(@PathVariable String name) {
+        return new ResponseEntity<>(productService.getProductByName(name), HttpStatus.OK);
     }
 
     @PutMapping("/update")
-    public Product updateProduct(@RequestBody Product product) {
-        return service.updateProduct(product);
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product) {
+        return new ResponseEntity<>(productService.updateProduct(product), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteProduct(@PathVariable int id) {
-        return service.deleteProduct(id);
+    public ResponseEntity<String> deleteProduct(@PathVariable int id) {
+        return new ResponseEntity<>(productService.deleteProduct(id), HttpStatus.OK);
     }
 }

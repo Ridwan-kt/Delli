@@ -1,0 +1,12 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: Delivery App
+  datasource:
+    url: jdbc:postgresql://localhost:5432/delli-db
+    username: postgres
+    password: psql
+  jpa:
+    hibernate:
+      ddl-auto: create

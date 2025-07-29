@@ -1,15 +1,11 @@
 package com.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
-
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Setter
 @Getter
 @Entity
@@ -17,11 +13,10 @@ import lombok.*;
 public class Product {
 
     @Id
-    @NonNull
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @NonNull
     private String name;
     private int quantity;
     private double price;
+
 }
