@@ -5,8 +5,8 @@
 #Build files
 /target/
 
-compose.yaml
-Dockerfile
+#compose.yaml
+#Dockerfile
 mvnw
 mvnw.cmd
 README.Docker.md
